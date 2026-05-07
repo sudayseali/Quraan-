@@ -10,23 +10,56 @@ export function AudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const playPromiseRef = useRef<Promise<void> | void>();
 
   useEffect(() => {
     if (playingAyah && playingAyah.audio && audioRef.current) {
-      audioRef.current.src = playingAyah.audio;
-      audioRef.current.play().catch(console.error);
+      const audio = audioRef.current;
+      audio.src = playingAyah.audio;
       setIsPlaying(true);
+      const playPromise = audio.play();
+      playPromiseRef.current = playPromise;
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error(error);
+          setIsPlaying(false);
+        });
+      }
     }
   }, [playingAyah]);
+
+  const pauseAudio = () => {
+    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (playPromiseRef.current !== undefined) {
+      playPromiseRef.current.then(() => {
+        audio.pause();
+        setIsPlaying(false);
+      }).catch((e) => {
+        console.error(e);
+        setIsPlaying(false);
+      });
+    } else {
+      audio.pause();
+      setIsPlaying(false);
+    }
+  }
 
   const togglePlay = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
-      audioRef.current.pause();
+      pauseAudio();
     } else {
-      audioRef.current.play().catch(console.error);
+      setIsPlaying(true);
+      const playPromise = audioRef.current.play();
+      playPromiseRef.current = playPromise;
+      if (playPromise !== undefined) {
+        playPromise.catch((e) => {
+            console.error(e);
+            setIsPlaying(false);
+        });
+      }
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleTimeUpdate = () => {
@@ -69,6 +102,11 @@ export function AudioPlayer() {
     }
   }
 
+  const handleClose = () => {
+    pauseAudio();
+    setPlayingAyah(null);
+  };
+
   return (
     <>
       <audio
@@ -91,10 +129,7 @@ export function AudioPlayer() {
                   <h4 className="font-semibold text-sm truncate">Surah {currentSurahDetails?.englishName}</h4>
                   <p className="text-xs text-muted-foreground truncate">Ayah {playingAyah.numberInSurah}</p>
                 </div>
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => {
-                   if(audioRef.current) audioRef.current.pause();
-                   setPlayingAyah(null);
-                }}>
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={handleClose}>
                   <X className="h-4 w-4" />
                 </Button>
               </div>
