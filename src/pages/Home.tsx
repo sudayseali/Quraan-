@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getSurahs, getSurahDetails, SurahOverview } from '../services/api';
-import { Card } from '../components/ui/card';
-import { Skeleton } from '../components/ui/skeleton';
-import { Button } from '../components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { DownloadCloud, CheckCircle2, Loader2 } from 'lucide-react';
 

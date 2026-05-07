@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getSurahDetails, SurahDetails } from '../services/api';
 import { useQuran } from '../context/QuranContext';
-import { Skeleton } from '../components/ui/skeleton';
-import { Card } from '../components/ui/card';
-import { Button } from '../components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Play, Pause, Bookmark, ChevronLeft } from 'lucide-react';
 import { motion } from 'motion/react';
 

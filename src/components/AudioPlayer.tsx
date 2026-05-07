@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useQuran } from '../context/QuranContext';
 import { Play, Pause, SkipBack, SkipForward, X } from 'lucide-react';
-import { Slider } from './ui/slider';
-import { Button } from './ui/button';
+import { Slider } from '@/components/ui/slider';
+import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function AudioPlayer() {

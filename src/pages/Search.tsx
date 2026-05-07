@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { getSurahs, SurahOverview } from '../services/api';
-import { Card } from '../components/ui/card';
-import { Input } from '../components/ui/input';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Search as SearchIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 

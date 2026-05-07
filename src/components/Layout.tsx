@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { Moon, Sun, BookOpen, Bookmark, Search } from 'lucide-react';
-import { Button, buttonVariants } from './ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { AudioPlayer } from './AudioPlayer';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';

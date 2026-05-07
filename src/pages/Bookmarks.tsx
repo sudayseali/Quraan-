@@ -1,11 +1,11 @@
 import { useQuran } from '../context/QuranContext';
-import { Card } from '../components/ui/card';
-import { Button, buttonVariants } from '../components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Bookmark, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getSurahs, SurahOverview } from '../services/api';
-import { Skeleton } from '../components/ui/skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
 export function Bookmarks() {
